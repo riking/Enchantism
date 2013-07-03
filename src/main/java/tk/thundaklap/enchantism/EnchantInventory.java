@@ -1,9 +1,6 @@
 package tk.thundaklap.enchantism;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

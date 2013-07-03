@@ -10,10 +10,11 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import static java.util.Collections.EMPTY_LIST;
-
 public final class Utils {
-    private static Map<Material, List<Enchantment>> cachedEnchantmentLists = new HashMap<Material, List<Enchantment>>();
+    private static final Map<Material, List<Enchantment>> cachedEnchantmentLists = new HashMap<Material, List<Enchantment>>();
+
+    @SuppressWarnings("unchecked")
+    private static final List<Enchantment> EMPTY_LIST = java.util.Collections.EMPTY_LIST;
 
     static {
         // cachedEnchantmentLists
@@ -40,10 +41,6 @@ public final class Utils {
         if (cachedEnchantmentLists.containsKey(type)) {
             return cachedEnchantmentLists.get(type);
         }
-
-        // if (type == Material.BOOK) {
-        //     return Arrays.asList(Enchantment.values());
-        // }
 
         List<Enchantment> ret = new ArrayList<Enchantment>(7);
         for (Enchantment enc : Enchantment.values()) {
