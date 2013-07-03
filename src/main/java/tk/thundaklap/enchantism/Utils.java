@@ -11,15 +11,37 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public final class Utils {
+    private static final Map<Enchantment, String> readableName = new HashMap<Enchantment, String>();
     private static final Map<Material, List<Enchantment>> cachedEnchantmentLists = new HashMap<Material, List<Enchantment>>();
 
     @SuppressWarnings("unchecked")
     private static final List<Enchantment> EMPTY_LIST = java.util.Collections.EMPTY_LIST;
 
     static {
-        // cachedEnchantmentLists
         cachedEnchantmentLists.put(Material.BOOK, Arrays.asList(Enchantment.values()));
 
+        readableName.put(Enchantment.ARROW_DAMAGE, "Power");
+        readableName.put(Enchantment.ARROW_FIRE, "Flame");
+        readableName.put(Enchantment.ARROW_INFINITE, "Infinity");
+        readableName.put(Enchantment.ARROW_KNOCKBACK, "Punch");
+        readableName.put(Enchantment.DAMAGE_ALL, "Sharpness");
+        readableName.put(Enchantment.DAMAGE_ARTHROPODS, "Bane of Arthropods");
+        readableName.put(Enchantment.DAMAGE_UNDEAD, "Smite");
+        readableName.put(Enchantment.DIG_SPEED, "Efficiency");
+        readableName.put(Enchantment.DURABILITY, "Unbreaking");
+        readableName.put(Enchantment.FIRE_ASPECT, "Fire Aspect");
+        readableName.put(Enchantment.KNOCKBACK, "Knockback");
+        readableName.put(Enchantment.LOOT_BONUS_BLOCKS, "Fortune");
+        readableName.put(Enchantment.LOOT_BONUS_MOBS, "Looting");
+        readableName.put(Enchantment.OXYGEN, "Respiration");
+        readableName.put(Enchantment.PROTECTION_ENVIRONMENTAL, "Protection");
+        readableName.put(Enchantment.PROTECTION_EXPLOSIONS, "Blast Protection");
+        readableName.put(Enchantment.PROTECTION_FALL, "Feather Falling");
+        readableName.put(Enchantment.PROTECTION_FIRE, "Fire Protection");
+        readableName.put(Enchantment.PROTECTION_PROJECTILE, "Projectile Protection");
+        readableName.put(Enchantment.SILK_TOUCH, "Silk Touch");
+        readableName.put(Enchantment.THORNS, "Thorns");
+        readableName.put(Enchantment.WATER_WORKER, "Aqua Affinity");
     }
 
     /**
@@ -57,4 +79,40 @@ public final class Utils {
         cachedEnchantmentLists.put(type, ret);
         return ret;
     }
+
+    public static String readableNameForEnchantment(Enchantment enchant) {
+        if (readableName.containsKey(enchant)) {
+            return readableName.get(enchant);
+        }
+
+        return "Undefined";
+    }
+
+    public static String intToRomanNumerals(int i) {
+        switch (i) {
+        case 1:
+            return "I";
+        case 2:
+            return "II";
+        case 3:
+            return "III";
+        case 4:
+            return "IV";
+        case 5:
+            return "V";
+        case 6:
+            return "VI";
+        case 7:
+            return "VII";
+        case 8:
+            return "VIII";
+        case 9:
+            return "IX";
+        case 10:
+            return "X";
+        default:
+            return "enchantment.level." + i;
+        }
+    }
+
 }
