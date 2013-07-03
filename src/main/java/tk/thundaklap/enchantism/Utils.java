@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -85,7 +86,7 @@ public final class Utils {
             return readableName.get(enchant);
         }
 
-        return "Undefined";
+        return StringUtils.capitalize(enchant.getName());
     }
 
     public static String intToRomanNumerals(int i) {
@@ -111,7 +112,7 @@ public final class Utils {
         case 10:
             return "X";
         default:
-            return "enchantment.level." + i;
+            return Integer.toString(i);
         }
     }
 
