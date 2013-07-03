@@ -68,24 +68,9 @@ public final class EnchantInventory {
             showUnenchant = change == null ? false : change.getType() == Material.ENCHANTED_BOOK;
 
         } else {
-            int numberOfEnchants = applicableEnchantments.size();
-            pageCount = (numberOfEnchants - 1) / ENCHANTMENTS_PER_PAGE;
-            pages = new EnchantPage[pageCount + 1];
+            pages = Enchantism.getPageFactory().getEnchantPages(applicableEnchantments);
+            pageCount = pages.length - 1;
 
-            for (int i = 0; i < pages.length; i++) {
-                pages[i] = new EnchantPage();
-            }
-
-            int currentlyAddingPage = 0;
-
-            for (Enchantment enchant : applicableEnchantments) {
-                // Method returns false if the page is full.
-                if (!pages[currentlyAddingPage].addEnchantment(enchant)) {
-                    pages[++currentlyAddingPage].addEnchantment(enchant);
-                }
-            }
-
-            pages[currentlyAddingPage].fill();
             showUnenchant = true;
         }
         updatePlayerInv();

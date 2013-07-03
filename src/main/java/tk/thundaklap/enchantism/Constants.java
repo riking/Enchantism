@@ -24,9 +24,6 @@ public class Constants {
     public static final int SLOT_NEXT_PAGE = 8;
     public static final int SLOT_ENCH_TABLE = 13;
 
-    // Other numeric constants
-    public static final int ENCHANTMENTS_PER_PAGE = 8;
-
     /***********************************
      *  ItemStacks                     *
      ***********************************/
