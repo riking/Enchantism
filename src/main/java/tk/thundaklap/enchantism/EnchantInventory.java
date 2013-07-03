@@ -1,5 +1,6 @@
 package tk.thundaklap.enchantism;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
 import static tk.thundaklap.enchantism.Constants.*;
@@ -158,22 +160,25 @@ public final class EnchantInventory {
 
                 if (item != null && !item.getType().equals(Material.AIR)) {
                     if (item.getType() == Material.ENCHANTED_BOOK) {
-                        
-                        EnchantmentStorageMeta meta = (EnchantmentStorageMeta)item.getItemMeta();
-                        
-                        Map<Enchantment, Integer> enchants = meta.getStoredEnchants();
-                        
-                        for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-                            meta.removeStoredEnchant(entry.getKey());
+                        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+
+                        for (Enchantment en : meta.getStoredEnchants().keySet()) {
+                            meta.removeStoredEnchant(en);
                         }
-                        
+                        for (Enchantment en : meta.getEnchants().keySet()) {
+                            meta.removeEnchant(en);
+                        }
                         item.setItemMeta(meta);
-                        
+
                         item.setType(Material.BOOK);
                     } else {
-                        for (Map.Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
-                            item.removeEnchantment(entry.getKey());
+                        ItemMeta meta = item.getItemMeta();
+
+                        for (Enchantment en : meta.getEnchants().keySet()) {
+                            meta.removeEnchant(en);
                         }
+
+                        item.setItemMeta(meta);
                     }
                     player.playSound(player.getLocation(), Sound.GLASS, 2F, 1F);
                     slotChange();
