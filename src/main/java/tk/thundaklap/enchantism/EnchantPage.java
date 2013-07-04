@@ -15,23 +15,22 @@ public class EnchantPage {
     private ItemStack[] inventory;
     private int enchantIndex = 0;
 
-    private Map<Integer, EnchantLevelCost> levelsForSlot = new HashMap<Integer, EnchantLevelCost>();
+    private Map<Integer, EnchantLevelCost> levelsForSlot;
 
     public EnchantPage() {
         inventory = Constants.getPageTemplate();
+        levelsForSlot = new HashMap<Integer, EnchantLevelCost>();
+    }
+
+    public EnchantPage(ItemStack[] inv, Map<Integer, EnchantLevelCost> positions) {
+        inventory = inv;
+        levelsForSlot = positions;
     }
 
     public void setEmpty() {
         inventory = Constants.INV_EMPTY_PAGE;
     }
 
-    /**
-     * Add the enchantment to this page. If the page is full, false will be
-     * returned.
-     *
-     * @param enchant enchantment to add
-     * @return if the enchantment was added
-     */
     public boolean addEnchantment(Enchantment enchant) {
         // Enchant index too high, this page is full.
         if (enchantIndex >= 36) {
@@ -50,10 +49,22 @@ public class EnchantPage {
 
     }
 
+    /**
+     * Get the itemstacks to display in the inventory.
+     *
+     * @return items to show
+     */
     public ItemStack[] getInventory() {
         return inventory;
     }
 
+    /**
+     * Get the EnchantLevelCost based on an index into {@link #getInventory()}
+     * .
+     *
+     * @param slot slot desired
+     * @return the EnchantLevelCost at that slot
+     */
     public EnchantLevelCost enchantAtSlot(int slot) {
         return levelsForSlot.get(slot);
     }
